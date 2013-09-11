@@ -3,19 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>عختث</title>
+  <script src="jquery-2.0.2.min.js"></script>
+  <script src="animation.js"></script>
   <style type="text/css">
-  img#ekhtes {
-    width: 100%;
+  #love {
+    width: 320px;
+    display: none;
+    position: absolute;
+    z-index: 0;
   }
-  div#container {
-    max-width: 100%;
+  #ekhtes {
+    float: right;
+    z-index: 1;
+  }
+  #nima {
+    width: 275px;
+    top: 45px;
+    float: left;
+    position: absolute;
+    z-index: -1;
+  }
+  div#scene {
+    width: 70%;
     margin: 0 auto;
   }
+  div#message {
+    font-family: helvetica;
+    font-size: 4em;
+    max-width: 70%;
+    margin: 0 auto;
+    top: 350px;
+    left: 15%;
+    position: absolute;
+  }
+  #click { cursor: pointer; cursor: hand; }
   </style>
 </head>
 <body>
-  <div id="container">
-    <img src="./0028_24A000004160028.jpeg" id="ekhtes" />
+  <div id="scene">
+    <img src="./love.jpg" id="love" />
+    <img src="./ekhtes_kiss_bw.png" id="ekhtes" />
+    <img src="./nima-bw.png" id="nima" />
+  </div>
+
+  <div id="message">
+    <span id="click">zomg click me!!!11</span>
   </div>
 </body>
 </html>
