@@ -15,53 +15,50 @@ $(window).load(function() {
 
   var give_a_kiss = function () {
     var loved_one_position = loved_one.position()
-    var lover_initial_position = lover.position()
 
     $("#click").hide()
 
     var initial_position = loved_one_position.left;
-    var last_position_in_animation = false;
+    var last_position_in_animation = -1;
 
     var play_the_animation = function(the_list) {
-      if(the_list.length > 0) {
-        var head = the_list[0]
-        var tail = the_list.slice(1)
+      if(the_list.length == 0)
+        return;
 
-        desired_position__the_number = initial_position*parseFloat($(head).data("tl"))
-        var desired_position = {
-          left: desired_position__the_number
-        }
+      var head = the_list[0]
+      var tail = the_list.slice(1)
 
-        var transition_time;
-        if(last_position_in_animation == desired_position__the_number) {
-          transition_time = 0
-        } else {
-          transition_time = 1000
-        }
-        last_position_in_animation = desired_position__the_number
+      var tl = parseFloat($(head).data("tl"))
+      var desired_position = { left: initial_position*tl }
 
-        $("#message").html($(head).html())
-        var pause = parseFloat($(head).data("pause") || 1)
+      var transition_time = 1000;
+      if(last_position_in_animation == tl) {
+        transition_time = 0
+      }
 
-        function queue_to_play_rest_of_animation() {
-          lover.animate(desired_position, transition_time, function() {
-            setTimeout(function() { play_the_animation(tail) }, pause*500)
+      last_position_in_animation = tl
+
+      $("#message").html($(head).html())
+      var pause = parseFloat($(head).data("pause") || 1)
+
+      var continue_animation = function() {
+        lover.animate(desired_position, transition_time, function() {
+          setTimeout(function() { play_the_animation(tail) }, pause*500)
+        })
+      }
+
+      if($(head).data("action") == "kiss") {
+        var lover_prev_position = lover.position();
+
+        lover.animate(kiss_position, 1000, function() {
+          $("#love").position(loved_one_position)
+          $("#love").fadeIn()
+          lover.animate(lover_prev_position, 1000, function() {
+            continue_animation()
           })
-        }
-
-        if($(head).data("action") == "kiss") {
-          var lover_prev_position = lover.position();
-
-          lover.animate(kiss_position, 1000, function() {
-            $("#love").position(loved_one_position)
-            $("#love").fadeIn()
-            lover.animate(lover_prev_position, 1000, function() {
-              queue_to_play_rest_of_animation()
-            })
-          })
-        } else {
-          queue_to_play_rest_of_animation()
-        }
+        })
+      } else {
+        continue_animation()
       }
     }
 
