@@ -6,26 +6,34 @@
   <script src="jquery-2.0.2.min.js"></script>
   <script src="animation.js"></script>
   <style type="text/css">
-  #love {
-    width: 320px;
-    display: none;
-    position: absolute;
-    z-index: 0;
-  }
-  #ekhtes {
-    float: right;
+  #loved_one {
     z-index: 1;
+    position: absolute;
   }
-  #nima {
-    width: 275px;
+  #lover {
     top: 45px;
+    left: 0;
+
     float: left;
     position: absolute;
     z-index: -1;
   }
+  #love {
+    max-width: 350px;
+    max-height: 350px;
+
+    display: none;
+    position: absolute;
+    z-index: 0;
+  }
+  #click { cursor: pointer; cursor: hand; text-decoration: underline; }
   div#scene {
     width: 70%;
     margin: 0 auto;
+    position: relative;
+  }
+  div#scene span {
+    display: none;
   }
   div#message {
     font-family: helvetica;
@@ -36,14 +44,19 @@
     left: 15%;
     position: absolute;
   }
-  #click { cursor: pointer; cursor: hand; }
   </style>
 </head>
 <body>
   <div id="scene">
     <img src="./love.jpg" id="love" />
-    <img src="./ekhtes_kiss_bw.png" id="ekhtes" />
-    <img src="./nima-bw.png" id="nima" />
+
+    <img src="./ekhtes_kiss_bw.png" id="loved_one" data-lips="[57, 148]" />
+    <img src="./nima-bw-smaller.png" id="lover" data-lips="[198, 120]" />
+
+    <span data-tl="0.7">ekhtes jan!!</span>
+    <span data-tl="0.7" data-action="kiss">:* :* :*</span>
+    <span data-tl="0">tavalodet mobarak! &lt;3 &lt;3 &lt;3</span>
+    <span data-tl="0">tavalodet mobarak! &lt;3 &lt;3 &lt;3<br /><i>– nima</i></span>
   </div>
 
   <div id="message">
